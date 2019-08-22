@@ -60,18 +60,24 @@ const rollupBuilds = [
   // Generate unminifed bundle
   {
     input: './src/js/shepherd.js',
-
+    external: ['tippy.js'],
     output: [
       {
         file: pkg.main,
         format: 'umd',
         name: 'Shepherd',
-        sourcemap: true
+        sourcemap: true,
+        globals: {
+          'tippy.js': 'tippy'
+        }
       },
       {
         file: pkg.module,
         format: 'esm',
-        sourcemap: true
+        sourcemap: true,
+        globals: {
+          'tippy.js': 'tippy'
+        }
       }
     ],
     plugins
@@ -83,17 +89,24 @@ if (!process.env.DEVELOPMENT) {
     // Generate minifed bundle
     {
       input: './src/js/shepherd.js',
+      external: ['tippy.js', 'popper.js'],
       output: [
         {
           file: 'dist/js/shepherd.min.js',
           format: 'umd',
           name: 'Shepherd',
-          sourcemap: true
+          sourcemap: true,
+          globals: {
+            'tippy.js': 'tippy'
+          }
         },
         {
           file: 'dist/js/shepherd.esm.min.js',
           format: 'esm',
-          sourcemap: true
+          sourcemap: true,
+          globals: {
+            'tippy.js': 'tippy'
+          }
         }
       ],
       plugins: [
